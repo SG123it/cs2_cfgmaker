@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
-#include <Localization.hpp>
+#include <Localization.hpp>//func from ./include
+#include <return_standart.hpp> //func from ./include
 #include <map>
 
-//Start keys: return_code, error_reason, error_file
-std::map<std::string, std::string> start(localization& language);
+return_standart start(localization& language);

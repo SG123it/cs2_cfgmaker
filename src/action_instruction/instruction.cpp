@@ -3,7 +3,6 @@
 #include <iostream>
 
 #include <clearwindow.hpp> //func from ./include
-
 #include <Localization.hpp> //func from ./include
 
 void instruction(localization& language){ //1

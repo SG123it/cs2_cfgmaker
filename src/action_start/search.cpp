@@ -11,7 +11,7 @@ std::map<std::string, std::string> steam_path(localization& language, bool with_
         {"return_value", ""}
     };
 
-    #if !defined(_WIN32) || defined(_WIN64) //Return code 111: Unable to start search::steam_path : available only in windows
+    #if !defined(_WIN32) || !defined(_WIN64) //Return code 111: Unable to start search::steam_path : available only in windows
         return_value["return_code"] = "111";
         return return_value;
     #endif

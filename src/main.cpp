@@ -8,6 +8,7 @@
 
 #include <clearwindow.hpp> //func from ./include
 #include <Localization.hpp> //func from ./include
+#include <return_standart.hpp> //func from ./include
 
 //checking OS
 //--------------
@@ -114,19 +115,16 @@ int main() {
             
             try{ //Try-Catch: 1
 
-                std::map<std::string, std::string> return_code = start(language);
-                if (return_code["return_code"] != "0") main_comment = language.getvalue(localization_data::TYPES::MAIN_ERROR_WARNING); //MAIN_ERROR_WARNING //...
+                return_standart return_code = start(language);
+                if (return_code.code != 0) {
+                    main_comment = language.getvalue(localization_data::TYPES::MAIN_ERROR_WARNING) + return_code.print(); //MAIN_ERROR_WARNING
+                }
                 else main_comment = language.getvalue(localization_data::TYPES::MAIN_THANK_YOU);//MAIN_THANK_YOU
 
             }
-            catch (std::exception& err) {
-
-                main_comment = language.getvalue(localization_data::TYPES::MAIN_CRITICAL_ERROR_WARNING); //MAIN_CRITICAL_ERROR_WARNING //...
-                continue;
-            }
             catch (...) {
 
-                main_comment = language.getvalue(localization_data::TYPES::MAIN_UNKNOWN_ERROR_WARNING); //MAIN_UNKNOWN_ERROR_WARNING //...
+                main_comment = language.getvalue(localization_data::TYPES::MAIN_UNKNOWN_ERROR_WARNING); //MAIN_UNKNOWN_ERROR_WARNING
                 continue;
             } 
         }

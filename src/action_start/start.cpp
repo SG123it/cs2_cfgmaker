@@ -8,13 +8,10 @@
 #include <clearwindow.hpp> //func from ./include
 #include "search.hpp" //func from ./include
 #include <Localization.hpp> //func from ./include
+#include <return_standart.hpp> //func from ./include
 
-std::map<std::string, std::string> start(localization& language) {
-    std::map<std::string, std::string> return_value = {
-        {"return_code", ""},
-        {"error_reason", ""},
-        {"error_file", ""}
-    };
+return_standart start(localization& language) {
+    return_standart return_value;
 
     //Step 1: Filling variables
     //--------------------------------------
@@ -55,9 +52,10 @@ std::map<std::string, std::string> start(localization& language) {
                 //-------------------
 
                 if (choice == 2) {
-                    return_value["return_code"] = "104";
-                    return_value["error_reason"] = "Steam account not selected";
-                    return_value["error_file"] = "src/action_start/start.cpp";
+                    return_value.code = 104;
+                    return_value.reason = "Steam account not selected";
+                    return_value.file = "src/action_start/start.cpp";
+                    return return_value;
                 }
                 if (choice == 1) {
                     std::string path = "";
@@ -79,9 +77,10 @@ std::map<std::string, std::string> start(localization& language) {
     } 
     catch(std::exception& err) {
 
-        return_value["return_code"] = "-1";
-        return_value["error_reason"] = std::string(err.what());
-        return_value["error_file"] = "src/action_start/start.cpp";
+        return_value.code = -1;
+        return_value.reason = std::string(err.what());
+        return_value.file = "src/action_start/start.cpp";
+        return_value.additional_information = "Critical error: try-catch 2";
         return return_value;
 
     }
@@ -92,9 +91,9 @@ std::map<std::string, std::string> start(localization& language) {
     if (!std::filesystem::exists(steam_cfgpath)) {
         //Return code 105: folder "730"(CS2 settings) isn't exists in user_folder(steam)
 
-        return_value["return_code"] = "105";
-        return_value["error_reason"] = "folder 730(CS2 settings) isn't exists in user_folder(steam)";
-        return_value["error_file"] = "src/action_start/start.cpp";
+        return_value.code = 105;
+        return_value.reason = "folder 730(CS2 settings) isn't exists in user_folder(steam)";
+        return_value.file = "src/action_start/start.cpp";
         return return_value;
         
     }
@@ -103,10 +102,11 @@ std::map<std::string, std::string> start(localization& language) {
     if (!std::filesystem::exists(steam_cfgpath)) {
         //Return code 106: folder "730/local/cfg"(CS2 cfg path) isn't exists
 
-        return_value["return_code"] = "106";
-        return_value["error_reason"] = "folder 730/local/cfg(CS2 cfg path) isn't exists";
-        return_value["error_file"] = "src/action_start/start.cpp";
+        return_value.code = 106;
+        return_value.reason = "folder 730/local/cfg(CS2 cfg path) isn't exists";
+        return_value.file = "src/action_start/start.cpp";
         return return_value;
+
     }
 
     //Step 2: read and build CFG
@@ -117,9 +117,9 @@ std::map<std::string, std::string> start(localization& language) {
     if (!user_keys.is_open()) {
         //Return code 107: Unable to open "cs2_user_keys_0_slot0.vcfg" file
 
-        return_value["return_code"] = "107";
-        return_value["error_reason"] = "Unable to open cs2_user_keys_0_slot0.vcfg file";
-        return_value["error_file"] = "src/action_start/start.cpp";
+        return_value.code = 107;
+        return_value.reason = "Unable to open cs2_user_keys_0_slot0.vcfg file";
+        return_value.file = "src/action_start/start.cpp";
         return return_value;
 
     }
@@ -128,9 +128,9 @@ std::map<std::string, std::string> start(localization& language) {
     if (!machine_convars.is_open()) {
         //Return code 108: Unable to open "cs2_machine_convars.vcfg" file
 
-        return_value["return_code"] = "108";
-        return_value["error_reason"] = "Unable to open cs2_machine_convars.vcfg file";
-        return_value["error_file"] = "src/action_start/start.cpp";
+        return_value.code = 108;
+        return_value.reason = "Unable to open cs2_machine_convars.vcfg file";
+        return_value.file = "src/action_start/start.cpp";
         return return_value;
 
     }
@@ -140,9 +140,9 @@ std::map<std::string, std::string> start(localization& language) {
         //Return code 109: Unable to open "cs2_user_convars_0_slot0.vcfg" file
 
         
-        return_value["return_code"] = "109";
-        return_value["error_reason"] = "Unable to open cs2_user_convars_0_slot0.vcfg file";
-        return_value["error_file"] = "src/action_start/start.cpp";
+        return_value.code = 109;
+        return_value.reason = "Unable to open cs2_user_convars_0_slot0.vcfg file";
+        return_value.file = "src/action_start/start.cpp";
         return return_value;
 
     }
@@ -155,9 +155,9 @@ std::map<std::string, std::string> start(localization& language) {
     if (!finish_cfg.is_open()) {
         //Return code 110: Unable to open new "configuration_CS.cfg" file at downloads
 
-        return_value["return_code"] = "110";
-        return_value["error_reason"] = "Unable to open new configuration_CS.cfg file at downloads";
-        return_value["error_file"] = "src/action_start/start.cpp";
+        return_value.code = 110;
+        return_value.reason = "Unable to open new configuration_CS.cfg file at downloads";
+        return_value.file = "src/action_start/start.cpp";
         return return_value;
 
     }
@@ -297,7 +297,7 @@ std::map<std::string, std::string> start(localization& language) {
     std::cin.get();
     clearwindow();
 
-    return_value["return_code"] = "0";
+    return_value.code = 0;
     return return_value;
 
 }
