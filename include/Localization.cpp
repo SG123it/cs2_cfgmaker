@@ -1,0 +1,19 @@
+#include <iostream>
+#include <map>
+#include <string>
+
+#include "headers/Localization.hpp"
+#include "Localization.hpp"
+
+std::string localization::getvalue(TYPES key) {
+
+    if (selected_language == languages::RUSSIAN) return RU[key];
+    else if (selected_language == languages::ENGLISH) return EN[key];
+
+}
+
+void localization::set_language(localization::languages language) {
+
+    selected_language = language;
+
+}
