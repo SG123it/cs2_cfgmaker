@@ -4,12 +4,11 @@
 
 #include "search.hpp"
 #include <Localization.hpp> //func from ./include
+#include <return_standart.hpp> //func from ./include
+#include <browser.hpp> //func from ./include
 
-std::map<std::string, std::string> steam_path(localization& language, bool with_account_id) {
-    std::map<std::string, std::string> return_value = {
-        {"return_code", "0"},
-        {"return_value", ""}
-    };
+return_standart steam_path(localization& language, bool with_account_id) {
+    return_standart return_var;
 
     #if !defined(_WIN32) || !defined(_WIN64) //Return code 111: Unable to start search::steam_path : available only in windows
         return_value["return_code"] = "111";
@@ -23,21 +22,26 @@ std::map<std::string, std::string> steam_path(localization& language, bool with_
     steampath += "Program Files (x86)\\"; //template: c:/Program Files (x86)
     if (!std::filesystem::exists(steampath)) {
         //Return code 101: Unable to exists Program Files (x86)
-        return_value["return_code"] = "101";
-        return return_value;
+        return_var.code = 101;
+        return_var.reason = "Unable to exists Program Files (x86)";
+        return_var.file = "src/action_start/search.cpp";
+        return return_var;
     }
 
     steampath += "Steam\\"; //template: c:/Program Files (x86)/steam
     if (!std::filesystem::exists(steampath)) {
         //Return code 102: Unable to exists steam directory
-        return_value["return_code"] = "102";
-        return return_value;
+        return_var.code = 102;
+        return_var.reason = "Unable to exists steam directory";
+        return_var.file = "src/action_start/search.cpp";
+        return return_var;
     }
     
     std::cout << language.getvalue(localization_data::TYPES::SEARCH_STEAM_FOUND) << steampath << std::endl; //SEARCH_STEAM_FOUND
 
-    return_value["return_value"] = steampath;
-    if (!with_account_id) return return_value;
+    //add.information = return_value
+    return_var.additional_information = steampath;
+    if (!with_account_id) return return_var;
 
     //--------------------
     bool steam_account_selected = false;
@@ -45,8 +49,10 @@ std::map<std::string, std::string> steam_path(localization& language, bool with_
     steampath += "userdata\\"; //template: c:/Program Files (x86)/steam/userdata
     if (!std::filesystem::exists(steampath)) {
         //Return code 103: Unable to exists ./Steam/userdata
-        return_value["return_code"] = "103";
-        return return_value;
+        return_var.code = 103;
+        return_var.reason = "Unable to exists ./Steam/userdata";
+        return_var.file = "src/action_start/search.cpp";
+        return return_var;
     }
 
     for (const std::filesystem::path iterator : std::filesystem::directory_iterator(steampath)) {
@@ -58,6 +64,7 @@ std::map<std::string, std::string> steam_path(localization& language, bool with_
         while (!steam_account_selected) {
 
             int choice = 0;
+            //account_id : is your account? yes, no, check in browser
             std::cout << account_id << language.getvalue(localization_data::TYPES::SEARCH_IS_YOUR_ACCOUNT);
 
             std::cin >> choice;
@@ -75,20 +82,13 @@ std::map<std::string, std::string> steam_path(localization& language, bool with_
                 steam_account_selected = true;
                 steampath += account_id + "\\";
 
-                return_value["return_value"] = steampath;
-                return return_value;
+                return_var.additional_information = steampath;
+                return return_var;
             }
 
             else if (choice == 2) break;
 
-            else if (choice == 3) {
-                std::cout << language.getvalue(localization_data::TYPES::SEARCH_CHECKIN_BROWSER) << account_id << std::endl; //SEARCH_CHECKIN_BROWSER
-                
-                std::cout << language.getvalue(localization_data::TYPES::GENERAL_PAUSE); //SEARCH_PAUSE
-                std::cin.ignore();
-                std::cin.get();
-
-            }
+            else if (choice == 3) { browser::openlink("https://steamdb.info/calculator/?player=" + std::string(account_id) + "&cc=ru");
         }
 
     }
@@ -96,9 +96,11 @@ std::map<std::string, std::string> steam_path(localization& language, bool with_
 
     if (!steam_account_selected) {
         //Return code 104: Steam account not selected or isn't exists
-        return_value["return_code"] = "104";
-        }
-        return return_value;
+        return_var.code = 104;
+        return_var.reason = "Steam account not selected or isn't exists";
+        return_var.file = "src/action_start/search.cpp";
+        return return_var;
+    }
 
-
+    return return_var; //to dissaper "return-statement with no value, in function returning 'return_standart' [-fpermissive]"
 }

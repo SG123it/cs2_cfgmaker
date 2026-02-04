@@ -9,6 +9,7 @@
 #include <clearwindow.hpp> //func from ./include
 #include <Localization.hpp> //func from ./include
 #include <return_standart.hpp> //func from ./include
+#include <browser.hpp> //func from ./include
 
 //checking OS
 //--------------
@@ -99,15 +100,8 @@ int main() {
 
         else if (choice == 2) {
 
-            #if defined _WIN32 || defined _WIN64
-                std::system("start https://github.com/SG123it");
-            #elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
-                std::system("xdg-open 'https://github.com/SG123it'");
-            #elif defined (__APPLE__)
-                std::system("open https://github.com/SG123it");
-            #endif
+            browser::openlink("https://github.com/SG123it");
             main_comment = language.getvalue(localization_data::TYPES::MAIN_THANK_YOU_GITHUB); //MAIN_THANK_YOU_GITHUB
-
 
         }
 

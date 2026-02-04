@@ -9,6 +9,7 @@
 #include "search.hpp" //func from ./include
 #include <Localization.hpp> //func from ./include
 #include <return_standart.hpp> //func from ./include
+#include <browser.hpp> //func from ./include
 
 return_standart start(localization& language) {
     return_standart return_value;
@@ -21,21 +22,18 @@ return_standart start(localization& language) {
     bool steam_account_selected = false;
 
     //--------------------
-    //Map all keys: 
-    //"return_code" - return code
-    //"return_value" - return value:
-    //
-    //if key - "return_code" != 0 - return_value = ""
-    //
-    //Return code 101: Unable to exists Program Files (x86)
-    //Return code 102: Unable to exists steam directory
-    //Return code 103: Unable to exists ./Steam/userdata
-    //Return code 104: Steam account not selected or isn't exists
-    //Return code 111: Unable to start search::steam_path : available only in windows
+    
+    /*add.information = return value
+    Return code 101: Unable to exists Program Files (x86)
+    Return code 102: Unable to exists steam directory
+    Return code 103: Unable to exists ./Steam/userdata
+    Return code 104: Steam account not selected or isn't exists
+    Return code 111: Unable to start search::steam_path : available only in windows
+    */
     try{ //Try-Catch: 2
 
-        std::map<std::string, std::string> temp = steam_path(language, true);
-        if (temp["return_code"] != "0") {
+        return_standart temp = steam_path(language, true);
+        if (temp.code != 0) {
             while (true) {
                 int choice = 0;
                 std::cout << language.getvalue(localization_data::TYPES::START_STEAM_NOT_FOUND); //START_STEAM_NOT_FOUND
@@ -72,7 +70,7 @@ return_standart start(localization& language) {
             }
         }
 
-        else steam_cfgpath = temp["return_value"];
+        else steam_cfgpath = temp.additional_information; //add.information = return value
         
     } 
     catch(std::exception& err) {
@@ -151,7 +149,10 @@ return_standart start(localization& language) {
 
     std::string download_path = std::getenv("USERPROFILE");
     download_path += "\\Downloads\\";
-    std::ofstream finish_cfg(download_path + "\\configuration_CS.cfg");
+    std::string configuration_file_path = download_path += "\\configuration_CS.cfg";
+
+
+    std::ofstream finish_cfg(configuration_file_path);
     if (!finish_cfg.is_open()) {
         //Return code 110: Unable to open new "configuration_CS.cfg" file at downloads
 
@@ -289,7 +290,7 @@ return_standart start(localization& language) {
     
     finish_cfg.close();
 
-    std::cout << language.getvalue(localization_data::TYPES::START_PATH_TO_CFG) << download_path <<  "configuration_CS.cfg"; //START_PATH_TO_CFG
+    std::cout << language.getvalue(localization_data::TYPES::START_PATH_TO_CFG) << configuration_file_path; //START_PATH_TO_CFG
     std::cout << language.getvalue(localization_data::TYPES::START_END_THANK_YOU); //START_END_THANK_YOU
 
     std::cout << language.getvalue(localization_data::TYPES::GENERAL_PAUSE); //SEARCH_PAUSE

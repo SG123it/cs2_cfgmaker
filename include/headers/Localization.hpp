@@ -16,6 +16,7 @@ public:
 
     void set_language(languages language);
     std::string getvalue(TYPES key);
+    languages get_selected_language();
 
 private:
     languages selected_language = languages::ENGLISH;
