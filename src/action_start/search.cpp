@@ -88,7 +88,7 @@ return_standart steam_path(localization& language, bool with_account_id) {
 
             else if (choice == 2) break;
 
-            else if (choice == 3) { browser::openlink("https://steamdb.info/calculator/?player=" + std::string(account_id) + "&cc=ru");
+            else if (choice == 3) browser::openlink("https://steamdb.info/calculator/?player=" + std::string(account_id) + "&cc=ru");
         }
 
     }

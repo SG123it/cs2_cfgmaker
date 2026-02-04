@@ -7,13 +7,13 @@ set(SRC
 
     src/main.cpp
     src/action_start/start.cpp
+    src/action_start/search.cpp
     src/action_instruction/instruction.cpp
 
 )
 #----------------------
 add_library(functions
     include/clearwindow.cpp
-    src/action_start/search.cpp
     include/Localization.cpp
     include/return_standart.cpp
     include/browser.cpp

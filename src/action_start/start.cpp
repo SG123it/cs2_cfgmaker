@@ -6,7 +6,7 @@
 #include <fstream>
 
 #include <clearwindow.hpp> //func from ./include
-#include "search.hpp" //func from ./include
+#include "search.hpp"
 #include <Localization.hpp> //func from ./include
 #include <return_standart.hpp> //func from ./include
 #include <browser.hpp> //func from ./include
