@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10...3.30)
 
 #Note: Before Push/PR do not forgot to change version
-project(CS2_cfgmaker_github VERSION 1.5)
+project(CS2_cfgmaker_github VERSION 1.6)
 
 set(SRC
 
