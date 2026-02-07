@@ -19,13 +19,6 @@ add_library(functions
     include/browser.cpp
 )
 target_include_directories(functions PUBLIC include/headers)
-#----------------------
-#From AI:
-set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
-set(BUILD_SHARED_LIBS OFF)
-set(CMAKE_EXE_LINKER_FLAGS "-static")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++")
-#----------------------
 
 add_executable(cfgmaker ${SRC})
 
