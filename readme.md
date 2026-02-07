@@ -1,3 +1,4 @@
+<h2>! Program use "inno setup" to install the project !
 <!------------------------------>
 <h2>Feedback: </h2>
 <h3>
