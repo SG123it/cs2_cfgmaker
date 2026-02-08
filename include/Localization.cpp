@@ -5,7 +5,7 @@
 #include "headers/Localization.hpp"
 #include "Localization.hpp"
 
-std::string localization::getvalue(TYPES key) {
+std::string localization::getvalue(LOC_TYPES key) {
 
     if (selected_language == languages::RUSSIAN) return RU[key];
     else if (selected_language == languages::ENGLISH) return EN[key];
