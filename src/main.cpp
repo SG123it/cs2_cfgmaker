@@ -68,10 +68,10 @@ int main() {
     while(true) {
         clearwindow();
 
-        std::cout << language.getvalue(localization_data::TYPES::MAIN_STARTUP_UI); //Print general UI
+        std::cout << language.getvalue(LOC_TYPES::MAIN_STARTUP_UI); //Print general UI
         //Output a warning if OS != windows
         #if !defined _WIN32 || !defined _WIN64
-            std::cout << language.getvalue(localization_data::TYPES::MAIN_WARNING_SOMEFUNC_UNAVAILABLE); //MAIN_WARNING_SOMEFUNC_UNAVAILABLE
+            std::cout << language.getvalue(LOC_TYPES::MAIN_WARNING_SOMEFUNC_UNAVAILABLE); //MAIN_WARNING_SOMEFUNC_UNAVAILABLE
         #endif
 
         std::cout << std::endl << main_comment << std::endl;
@@ -86,12 +86,12 @@ int main() {
         if (std::cin.fail()) { 
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-            main_comment = language.getvalue(localization_data::TYPES::MAIN_WARNING_SELECT_ACTION); //MAIN_WARNING_SELECT_ACTION
+            main_comment = language.getvalue(LOC_TYPES::MAIN_WARNING_SELECT_ACTION); //MAIN_WARNING_SELECT_ACTION
             continue;
         }
         //-------------------
         else if (choice < 1 || choice > 4) {
-            main_comment = language.getvalue(localization_data::TYPES::MAIN_WARNING_SELECT_ACTION); //MAIN_WARNING_SELECT_ACTION
+            main_comment = language.getvalue(LOC_TYPES::MAIN_WARNING_SELECT_ACTION); //MAIN_WARNING_SELECT_ACTION
             continue;
         }
 
@@ -101,7 +101,7 @@ int main() {
         else if (choice == 2) {
 
             browser::openlink("https://github.com/SG123it");
-            main_comment = language.getvalue(localization_data::TYPES::MAIN_THANK_YOU_GITHUB); //MAIN_THANK_YOU_GITHUB
+            main_comment = language.getvalue(LOC_TYPES::MAIN_THANK_YOU_GITHUB); //MAIN_THANK_YOU_GITHUB
 
         }
 
@@ -111,14 +111,14 @@ int main() {
 
                 return_standart return_code = start(language);
                 if (return_code.code != 0) {
-                    main_comment = language.getvalue(localization_data::TYPES::MAIN_ERROR_WARNING) + return_code.print(); //MAIN_ERROR_WARNING
+                    main_comment = language.getvalue(LOC_TYPES::MAIN_ERROR_WARNING) + return_code.print(); //MAIN_ERROR_WARNING
                 }
-                else main_comment = language.getvalue(localization_data::TYPES::MAIN_THANK_YOU);//MAIN_THANK_YOU
+                else main_comment = language.getvalue(LOC_TYPES::MAIN_THANK_YOU);//MAIN_THANK_YOU
 
             }
             catch (...) {
 
-                main_comment = language.getvalue(localization_data::TYPES::MAIN_UNKNOWN_ERROR_WARNING); //MAIN_UNKNOWN_ERROR_WARNING
+                main_comment = language.getvalue(LOC_TYPES::MAIN_UNKNOWN_ERROR_WARNING); //MAIN_UNKNOWN_ERROR_WARNING
                 continue;
             } 
         }

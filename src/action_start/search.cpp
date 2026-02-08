@@ -37,7 +37,7 @@ return_standart steam_path(localization& language, bool with_account_id) {
         return return_var;
     }
     
-    std::cout << language.getvalue(localization_data::TYPES::SEARCH_STEAM_FOUND) << steampath << std::endl; //SEARCH_STEAM_FOUND
+    std::cout << language.getvalue(LOC_TYPES::SEARCH_STEAM_FOUND) << steampath << std::endl; //SEARCH_STEAM_FOUND
 
     //add.information = return_value
     return_var.additional_information = steampath;
@@ -65,7 +65,7 @@ return_standart steam_path(localization& language, bool with_account_id) {
 
             int choice = 0;
             //account_id : is your account? yes, no, check in browser
-            std::cout << account_id << language.getvalue(localization_data::TYPES::SEARCH_IS_YOUR_ACCOUNT);
+            std::cout << account_id << language.getvalue(LOC_TYPES::SEARCH_IS_YOUR_ACCOUNT);
 
             std::cin >> choice;
             //From AI

@@ -36,7 +36,7 @@ return_standart start(localization& language) {
         if (temp.code != 0) {
             while (true) {
                 int choice = 0;
-                std::cout << language.getvalue(localization_data::TYPES::START_STEAM_NOT_FOUND); //START_STEAM_NOT_FOUND
+                std::cout << language.getvalue(LOC_TYPES::START_STEAM_NOT_FOUND); //START_STEAM_NOT_FOUND
                 std::cin >> choice;
                 
                 if (choice < 1 || choice > 2) continue;
@@ -57,7 +57,7 @@ return_standart start(localization& language) {
                 }
                 if (choice == 1) {
                     std::string path = "";
-                    std::cout << language.getvalue(localization_data::TYPES::START_ENTER_PATH); //START_ENTER_PATH
+                    std::cout << language.getvalue(LOC_TYPES::START_ENTER_PATH); //START_ENTER_PATH
                     std::cin.ignore();
                     std::getline(std::cin, path);
                     if (!std::filesystem::exists(path)) continue;
@@ -188,7 +188,7 @@ return_standart start(localization& language) {
         //---------
 
         line = "bind " + line;
-        std::cout << language.getvalue(localization_data::TYPES::START_BIND_DETECTED) << line << std::endl; //START_BIND_DETECTED
+        std::cout << language.getvalue(LOC_TYPES::START_BIND_DETECTED) << line << std::endl; //START_BIND_DETECTED
 
         finish_cfg << line << std::endl;
 
@@ -231,7 +231,7 @@ return_standart start(localization& language) {
 
         //---------
 
-        std::cout << language.getvalue(localization_data::TYPES::START_SETTINGS_DETECTED) << line << std::endl; //START_SETTINGS_DETECTED
+        std::cout << language.getvalue(LOC_TYPES::START_SETTINGS_DETECTED) << line << std::endl; //START_SETTINGS_DETECTED
 
         finish_cfg << line << std::endl;
 
@@ -273,14 +273,14 @@ return_standart start(localization& language) {
 
         //---------
 
-        std::cout << language.getvalue(localization_data::TYPES::START_SETTINGS_DETECTED) << line << std::endl; //START_SETTINGS_DETECTED
+        std::cout << language.getvalue(LOC_TYPES::START_SETTINGS_DETECTED) << line << std::endl; //START_SETTINGS_DETECTED
 
         finish_cfg << line << std::endl;
     }
     user_convars.close();
     line = "";
 
-    std::cout << language.getvalue(localization_data::TYPES::START_STEP3) << std::endl << std::endl; //START_STEP3
+    std::cout << language.getvalue(LOC_TYPES::START_STEP3) << std::endl << std::endl; //START_STEP3
 
 
     finish_cfg << "echo + | - -------------------------------------" << std::endl;
@@ -290,10 +290,10 @@ return_standart start(localization& language) {
     
     finish_cfg.close();
 
-    std::cout << language.getvalue(localization_data::TYPES::START_PATH_TO_CFG) << configuration_file_path; //START_PATH_TO_CFG
-    std::cout << language.getvalue(localization_data::TYPES::START_END_THANK_YOU); //START_END_THANK_YOU
+    std::cout << language.getvalue(LOC_TYPES::START_PATH_TO_CFG) << configuration_file_path; //START_PATH_TO_CFG
+    std::cout << language.getvalue(LOC_TYPES::START_END_THANK_YOU); //START_END_THANK_YOU
 
-    std::cout << language.getvalue(localization_data::TYPES::GENERAL_PAUSE); //SEARCH_PAUSE
+    std::cout << language.getvalue(LOC_TYPES::GENERAL_PAUSE); //SEARCH_PAUSE
     std::cin.ignore();
     std::cin.get();
     clearwindow();

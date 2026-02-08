@@ -3,50 +3,9 @@
 #include <map>
 #include <string>
 
+#include <Localization.hpp>
 
-class localization_data {
-    friend class localization;
-
-public:
-    enum TYPES {
-
-        GENERAL_PAUSE,
-
-        //-------------------------
-
-        MAIN_WARNING_SELECT_ACTION,
-        MAIN_STARTUP_UI,
-        MAIN_WARNING_SOMEFUNC_UNAVAILABLE,
-        MAIN_THANK_YOU_GITHUB,
-        MAIN_THANK_YOU,
-        MAIN_ERROR_WARNING,
-        MAIN_UNKNOWN_ERROR_WARNING,
-
-        //-------------------------
-
-        START_STEP1,
-        START_STEAM_NOT_FOUND,
-        START_ENTER_PATH,
-        START_STEP2,
-        START_DO_NOT_CLOSE_PROGRAM,
-        START_BIND_DETECTED,
-        START_SETTINGS_DETECTED,
-        START_STEP3,
-        START_PATH_TO_CFG,
-        START_END_THANK_YOU,
-
-        //-------------------------
-
-        INSTRUCTION_TEXT,
-
-        //-------------------------
-
-        SEARCH_IS_YOUR_ACCOUNT,
-        SEARCH_STEAM_FOUND
-    };
-
-protected:
-    std::map<localization_data::TYPES, std::string> RU {
+    std::map<LOC_TYPES, std::string> RU {
         {GENERAL_PAUSE, "\nНажмите на любую кнопку чтобы продолжить...\n"},
 
         //-------------------------
@@ -71,7 +30,7 @@ protected:
                         |           [3] - Начать             |
                         |               [4] - Выйти          |
                         --------------------------------------
-)"},
+    )"},
         {MAIN_WARNING_SOMEFUNC_UNAVAILABLE, R"(
     --------------------------------------------------------------------------------------------------------
     | Некоторые функции недоступны. за доп. информацией пожалуйста прочтите readme.md на github репозитории|
@@ -134,8 +93,8 @@ protected:
         {SEARCH_IS_YOUR_ACCOUNT, " : Ваш аккаунт?\n[1] - ДА\n[2] - НЕТ\n[3] - Проверить в браузере \n>>> "},
         {SEARCH_STEAM_FOUND, "Steam найден - "}
 
-    };
-    std::map<localization_data::TYPES, std::string> EN {
+};
+std::map<LOC_TYPES, std::string> EN {
         {GENERAL_PAUSE, "\nPress any key to continue...\n"},
 
         //-------------------------
@@ -221,5 +180,4 @@ protected:
 
         {SEARCH_IS_YOUR_ACCOUNT, " : Is your account?\n[1] - YES\n[2] - NO\n[3] - Check in browser \n>>> "},
         {SEARCH_STEAM_FOUND, "Steam found - "}
-    };
 };
