@@ -14,6 +14,7 @@ set(SRC
 #----------------------
 add_library(functions
     include/clearwindow.cpp
+    include/Localization_data.cpp
     include/Localization.cpp
     include/return_standart.cpp
     include/browser.cpp
